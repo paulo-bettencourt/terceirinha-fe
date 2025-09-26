@@ -1,17 +1,22 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { Api } from '../../services/api';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 @Component({
   selector: 'app-main',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './main.html',
   styleUrl: './main.scss',
 })
 export class Main implements OnInit {
   apiService = inject(Api);
-  events!: any;
+  events = signal<any>([]);
 
   ngOnInit(): void {
     console.log('?? ');
-    this.apiService.getEvents().subscribe((data) => (this.events = data));
+    this.apiService.getEvents().subscribe({
+      next: (data) => this.events.set(data),
+      error: (err) => console.error('Error:', err),
+    });
   }
 }

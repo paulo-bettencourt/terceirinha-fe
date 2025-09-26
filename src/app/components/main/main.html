@@ -1,3 +1,8 @@
-Eventos:
+<h2>Eventos:
 
-{{events}}
+  @let eventData = events();
+
+  @for(data of eventData; track data) {
+  <h4>{{data.name}}</h4>
+  <h4>{{data.location}}</h4>
+  }
