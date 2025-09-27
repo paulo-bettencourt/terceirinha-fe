@@ -1,0 +1,32 @@
+@let data = eventDetails();
+
+<div class="card-container">
+  <div class="center-block">
+    <h5>2 setembro</h5>
+  </div>
+  <div class="upper-container">
+    <div class="image-container">
+      <img [src]="'data:image/jpeg;base64,' + data.image">
+    </div>
+  </div>
+
+  <div class="lower-container">
+    <div>
+      <h3>{{data.name}}</h3>
+      <h4>{{data.location}}</h4>
+    </div>
+    <div>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus voluptatum voluptas deleniti, explicabo
+        soluta ratione ea labore sint dignissimos quibusdam laudantium fugiat, expedita ex dolor doloremque ullam
+        doloribus earum nihil. Amet, molestiae sapiente! Expedita assumenda nihil repellendus tempore rem officiis,
+        porro mollitia delectus quos doloribus quisquam ipsa est dicta maiores nulla, voluptatum iste cumque! Natus
+        deserunt laboriosam, delectus labore ad voluptas. Commodi sapiente reprehenderit ratione odio numquam. Labore
+        et, recusandae sapiente delectus blanditiis cum. Voluptas fugit aut quod molestias soluta dignissimos facere
+        nobis obcaecati quas tenetur facilis excepturi, minima quisquam, porro enim. Est ullam rerum vel, mollitia ipsam
+        nemo nihil?</p>
+    </div>
+    <div>
+      <a class="btn">Detalhes</a>
+    </div>
+  </div>
+</div>

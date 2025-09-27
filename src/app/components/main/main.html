@@ -1,9 +1,12 @@
+@let eventData = events();
+@let isPageDetail = isPageEvent;
+
 <div class="center-block">
   <h1>Terceirinha</h1>
   <h2>Nono mês do ano</h2>
 </div>
-@let eventData = events();
 
+@if(!isPageDetail) {
 <div class="cards-container">
   @for(data of eventData; track data.id; let i = $index; let count = $count) {
   <div class="card-container">
@@ -12,10 +15,7 @@
     </div>
     <div class="upper-container">
       <div class="image-container">
-        <img
-          [src]="data.image"
-          alt="event image"
-        >
+        <img [src]="'data:image/jpeg;base64,' + data.image">
       </div>
     </div>
 
@@ -27,13 +27,11 @@
       <div>
         <p>Festa regional do Espírito Santo com a presença de....</p>
       </div>
-      <div>
-        <a
-          href="#"
-          class="btn"
-        >Detalhes</a>
+      <div (click)="goToEventDetail(data.id)">
+        <a class="btn">Detalhes</a>
       </div>
     </div>
   </div>
   }
 </div>
+}
