@@ -1,16 +1,21 @@
-<h1>Terceirinha</h1>
-
+<div class="center-block">
+  <h1>Terceirinha</h1>
+  <h2>Nono mês do ano</h2>
+</div>
 @let eventData = events();
 
 <div class="cards-container">
-  @for(data of eventData; track data.id) {
+  @for(data of eventData; track data.id; let i = $index; let count = $count) {
   <div class="card-container">
+    <div class="center-block">
+      <h5>{{count - i}} setembro</h5>
+    </div>
     <div class="upper-container">
       <div class="image-container">
         <img
-          src="https://api.dicebear.com/7.x/thumbs/svg?seed=Alaina"
-          alt="profile image"
-        />
+          [src]="data.image"
+          alt="event image"
+        >
       </div>
     </div>
 

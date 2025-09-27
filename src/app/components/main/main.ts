@@ -1,10 +1,10 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { Api } from '../../services/api';
-import { CommonModule } from '@angular/common';
+import { CommonModule, JsonPipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 @Component({
   selector: 'app-main',
-  imports: [CommonModule],
+  imports: [CommonModule, JsonPipe],
   templateUrl: './main.html',
   styleUrl: './main.scss',
 })
