@@ -1,12 +1,11 @@
 @let eventData = events();
-@let isPageDetail = isPageEvent;
 
 <div class="center-block">
   <h1>Terceirinha</h1>
   <h2>Nono mês do ano</h2>
 </div>
 
-@if(!isPageDetail) {
+@if(isListOfEvents()) {
 <div class="cards-container">
   @for(data of eventData; track data.id; let i = $index; let count = $count) {
   <div class="card-container">
@@ -35,3 +34,6 @@
   }
 </div>
 }
+
+<!-- Dynamic component placeholder is always in the DOM -->
+<ng-template #dynamicContainer></ng-template>
