@@ -5,7 +5,6 @@ import {
   Input,
   input,
   OnInit,
-  output,
   Output,
   ViewContainerRef,
 } from '@angular/core';
@@ -17,18 +16,10 @@ import {
   styleUrl: './event-page.scss',
 })
 export class EventPage {
-  event = input<Event>();
-  close = output<boolean>();
+  @Input() event!: any; // or your Event interface
+  @Output() close = new EventEmitter<void>();
 
   destroyEventPage() {
-    this.close.emit(true);
+    this.close.emit();
   }
-}
-
-export interface Event {
-  id: number;
-  name: string;
-  location: string;
-  date: string;
-  image: string;
 }

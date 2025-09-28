@@ -1,20 +1,20 @@
 <div class="card-container">
   <div class="center-block">
-    <h5>{{event()?.id}} setembro</h5>
+    <h5>{{event.id}} setembro</h5>
   </div>
   <div class="upper-container">
     <div class="image-container">
-      <img [src]="'data:image/jpeg;base64,' + event()?.image">
+      <img [src]="'data:image/jpeg;base64,' + event.image">
     </div>
   </div>
 
   <div class="lower-container">
     <div>
-      <h3>{{event()?.name}}</h3>
-      <h4>{{event()?.location}}</h4>
+      <h3>{{event.name}}</h3>
+      <h4>{{event.location}}</h4>
     </div>
     <div>
-      <p>{{event()?.date}}</p>
+      <p>{{event.date}}</p>
     </div>
     <div (click)="destroyEventPage()">
       <a class="btn">Detalhes</a>
