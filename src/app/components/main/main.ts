@@ -4,6 +4,7 @@ import {
   inject,
   OnInit,
   signal,
+  TemplateRef,
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
@@ -15,7 +16,7 @@ import { EventPage } from '../event-page/event-page';
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [CommonModule, JsonPipe],
+  imports: [CommonModule, JsonPipe, EventPage],
   templateUrl: './main.html',
   styleUrls: ['./main.scss'],
 })
@@ -25,7 +26,8 @@ export class Main implements OnInit {
   events = signal<any>([]);
   componentRef: ComponentRef<EventPage> | null = null;
   isListOfEvents = signal(true);
-
+  @ViewChild('dynamicContainer', { static: true })
+  dynamicContainer!: TemplateRef<any>;
   @ViewChild('dynamicContainer', { read: ViewContainerRef, static: true })
   viewContainer!: ViewContainerRef;
 
@@ -36,7 +38,10 @@ export class Main implements OnInit {
     });
   }
 
-  goToEventDetail(eventId: number) {
+  eventId = signal(0);
+
+  goToEventDetail(eventId: number, index: number) {
+    this.eventId.set(index);
     // Destroy previous component if exists
     if (this.componentRef) {
       this.destroyEventPage();
@@ -50,6 +55,9 @@ export class Main implements OnInit {
 
     // Pass the event data
     this.componentRef.instance.eventDetails = eventId;
+
+    // Pass data via the instance
+    this.componentRef.instance.event = this.events()[index];
 
     console.log('Component has been created!', this.componentRef.instance);
   }

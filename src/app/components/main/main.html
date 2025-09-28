@@ -1,4 +1,5 @@
 @let eventData = events();
+@let renderedComponentData = eventData[eventId()];
 
 <div class="center-block">
   <h1>Terceirinha</h1>
@@ -26,7 +27,7 @@
       <div>
         <p>Festa regional do Espírito Santo com a presença de....</p>
       </div>
-      <div (click)="goToEventDetail(data.id)">
+      <div (click)="goToEventDetail(data.id, $index)">
         <a class="btn">Detalhes</a>
       </div>
     </div>
