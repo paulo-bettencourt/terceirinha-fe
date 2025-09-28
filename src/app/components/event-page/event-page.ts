@@ -1,4 +1,14 @@
-import { AfterViewInit, Component, Input, input, OnInit, ViewContainerRef } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  input,
+  OnInit,
+  output,
+  Output,
+  ViewContainerRef,
+} from '@angular/core';
 
 @Component({
   selector: 'app-event-page',
@@ -6,11 +16,11 @@ import { AfterViewInit, Component, Input, input, OnInit, ViewContainerRef } from
   templateUrl: './event-page.html',
   styleUrl: './event-page.scss',
 })
-export class EventPage implements AfterViewInit {
-  eventDetails: any = input();
-  @Input() event!: any; // or your Event interface
+export class EventPage {
+  event = input<any>();
+  close = output<boolean>();
 
-  ngAfterViewInit(): void {
-    console.log('event: ', this.event);
+  destroyEventPage() {
+    this.close.emit(true);
   }
 }

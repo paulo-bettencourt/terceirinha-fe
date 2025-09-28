@@ -16,7 +16,7 @@ import { EventPage } from '../event-page/event-page';
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [CommonModule, JsonPipe, EventPage],
+  imports: [CommonModule],
   templateUrl: './main.html',
   styleUrls: ['./main.scss'],
 })
@@ -24,10 +24,11 @@ export class Main implements OnInit {
   apiService = inject(Api);
   router = inject(Router);
   events = signal<any>([]);
-  componentRef: ComponentRef<EventPage> | null = null;
+
   isListOfEvents = signal(true);
-  @ViewChild('dynamicContainer', { static: true })
-  dynamicContainer!: TemplateRef<any>;
+  eventId = signal(0);
+
+  componentRef: ComponentRef<EventPage> | null = null;
   @ViewChild('dynamicContainer', { read: ViewContainerRef, static: true })
   viewContainer!: ViewContainerRef;
 
@@ -38,38 +39,30 @@ export class Main implements OnInit {
     });
   }
 
-  eventId = signal(0);
-
   goToEventDetail(eventId: number, index: number) {
     this.eventId.set(index);
-    // Destroy previous component if exists
+
     if (this.componentRef) {
       this.destroyEventPage();
     }
 
-    // Hide the list and show the dynamic component
     this.isListOfEvents.set(false);
 
-    // Create the component dynamically inside the placeholder
     this.componentRef = this.viewContainer.createComponent(EventPage);
 
-    // Pass the event data
-    this.componentRef.instance.eventDetails = eventId;
-
-    // Pass data via the instance
     this.componentRef.instance.event = this.events()[index];
 
-    console.log('Component has been created!', this.componentRef.instance);
+    // Subscribe to output
+    this.componentRef.instance.close.subscribe(() => {
+      this.destroyEventPage();
+    });
   }
 
   destroyEventPage() {
     if (this.componentRef) {
       this.componentRef.destroy();
       this.componentRef = null;
-
-      // Show the list again
       this.isListOfEvents.set(true);
-      console.log('Component destroyed!');
     }
   }
 }
