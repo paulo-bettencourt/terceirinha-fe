@@ -17,10 +17,18 @@ import {
   styleUrl: './event-page.scss',
 })
 export class EventPage {
-  event = input<any>();
+  event = input<Event>();
   close = output<boolean>();
 
   destroyEventPage() {
     this.close.emit(true);
   }
+}
+
+export interface Event {
+  id: number;
+  name: string;
+  location: string;
+  date: string;
+  image: string;
 }
