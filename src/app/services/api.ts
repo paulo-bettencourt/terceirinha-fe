@@ -8,6 +8,6 @@ export class Api {
   http = inject(HttpClient);
 
   getEvents() {
-    return this.http.get('http://localhost:8080/events');
+    return this.http.get('https://terceirinha-fe.onrender.com/events');
   }
 }
